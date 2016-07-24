@@ -17,5 +17,6 @@ class SignUpForm(forms.Form):
         ('Others', 'Others'),
     )
     gender = forms.ChoiceField(label='Gender', widget=forms.Select, choices=gender_options)
+    mobile = forms.CharField(max_length=20)
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(label='Enter your password', widget=forms.PasswordInput)

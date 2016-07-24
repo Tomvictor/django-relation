@@ -52,6 +52,7 @@ def sign_up(request):
             gender = form.cleaned_data.get("gender")
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            mobilno = form.cleaned_data.get("mobile")
             newuser = User.objects.create_user(username, email, password)
             newuser.first_name = first_name
             newuser.last_name = last_name
@@ -61,6 +62,7 @@ def sign_up(request):
             NewAccount = accounts()
             NewAccount.user = newuser
             NewAccount.gender = gender
+            NewAccount.mobile_no = mobilno
             NewAccount.save()
             messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (first_name))
             return render(request, "home.html", {})
