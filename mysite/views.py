@@ -53,17 +53,16 @@ def sign_up(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             mobilno = form.cleaned_data.get("mobile")
-            newuser = User.objects.create_user(username, email, password)
-            newuser.first_name = first_name
-            newuser.last_name = last_name
-            newuser.date_joined = timezone.now()
-            newuser.is_active = False
-            newuser.save()
-            NewAccount = accounts()
-            NewAccount.user = newuser
-            NewAccount.gender = gender
-            NewAccount.mobile_no = mobilno
-            NewAccount.save()
+            dob = form.cleaned_data.get("dob")
+            test = accounts()
+            test.user.objects.create_user(username,email,password)
+            test.user.first_name =first_name
+            test.user.last_name = last_name
+            test.gender = gender
+            test.mobile_no =mobilno
+            test.date_of_birth =dob
+            test.is_active = False
+            test.save()
             messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (first_name))
             return render(request, "home.html", {})
         else:

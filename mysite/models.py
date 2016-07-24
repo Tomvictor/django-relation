@@ -9,7 +9,7 @@ from django.conf import settings
 class accounts(models.Model):
     user = models.OneToOneField(User)
     mobile_no = models.CharField(max_length=20, default=None,blank=True)
-    date_of_birth = models.DateField(default=timezone.now)
+    date_of_birth = models.DateField(default=timezone.now, blank=True)
     gender_choice = (
         ('M', 'Male'), ('F', 'Female')
     )
