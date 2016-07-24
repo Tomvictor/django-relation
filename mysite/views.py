@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import Http404
 from django.utils import timezone
 from .forms import LoginForm, SignUpForm
+from .models import accounts
 
 
 # Create your views here.
@@ -43,7 +44,7 @@ def login(request):
 def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        # print(request.POST)
+        print(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data.get("first_name")
             last_name = form.cleaned_data.get("last_name")
@@ -51,23 +52,23 @@ def sign_up(request):
             gender = form.cleaned_data.get("gender")
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            user = User.objects.create_user(username, email, password)
-            user.first_name = first_name
-            user.last_name = last_name
-            user.date_joined = timezone.now()
-            user.is_active = False
-            user.save()
+            newuser = User.objects.create_user(username, email, password)
+            newuser.first_name = first_name
+            newuser.last_name = last_name
+            newuser.date_joined = timezone.now()
+            newuser.is_active = False
+            newuser.save()
             NewAccount = accounts()
-            NewAccount.user = user
+            NewAccount.user = newuser
             NewAccount.gender = gender
             NewAccount.save()
             messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (first_name))
             return render(request, "home.html", {})
         else:
             messages.success(request, "Sorry you have submitted wrong or invalid informations!.")
-            return redirect("mysite:login-page")
+            return redirect("home-page")
 
-    return redirect("mysite:login-page")
+    return redirect("home-page")
 
 
 def home(request):
