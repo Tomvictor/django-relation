@@ -1,0 +1,29 @@
+
+
+{% if messages %}
+    {% for message in messages %}
+
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+        </div>
+
+    {% endfor %}
+{% endif %}
+
+<h4>Login :</h4>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ Form|crispy }}
+    <input type="submit" value="Submit"/>
+</form>
+
+
+<h3>Sign Up :</h3>
+<form action="/signup/" method="post">
+    {% csrf_token %}
+    {{ SignUpForm|crispy }}
+    <input type="submit" value="Submit"/>
+</form>
+
