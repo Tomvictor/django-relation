@@ -46,24 +46,22 @@ def sign_up(request):
         form = SignUpForm(request.POST)
         print(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data.get("first_name")
-            last_name = form.cleaned_data.get("last_name")
-            email = form.cleaned_data.get("email")
-            gender = form.cleaned_data.get("gender")
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            mobilno = form.cleaned_data.get("mobile")
-            dob = form.cleaned_data.get("dob")
-            test = accounts()
-            test.user.objects.create_user(username,email,password)
-            test.user.first_name =first_name
-            test.user.last_name = last_name
-            test.gender = gender
-            test.mobile_no =mobilno
-            test.date_of_birth =dob
-            test.is_active = False
-            test.save()
-            messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (first_name))
+            FirstName = form.cleaned_data.get("first_name")
+            LastName = form.cleaned_data.get("last_name")
+            Email = form.cleaned_data.get("email")
+            Gender = form.cleaned_data.get("gender")
+            Username = form.cleaned_data.get("username")
+            Password = form.cleaned_data.get("password")
+            MobileNo = form.cleaned_data.get("mobile")
+            Dob = form.cleaned_data.get("dob")
+            NewUser = User.objects.create_user(Username, Email, Password)
+            #NewUser.first_name = FirstName
+            NewUser.last_name = LastName
+            NewUser.is_active = False
+            NewUser.save()
+            NewAccount = accounts(FirstName=FirstName, date_of_birth=Dob,gender=Gender,mobile_no=MobileNo)
+            NewAccount.save()
+            messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (FirstName))
             return render(request, "home.html", {})
         else:
             messages.success(request, "Sorry you have submitted wrong or invalid informations!.")
@@ -78,5 +76,5 @@ def home(request):
 
 
 def signup(request):
-    messages.success(request,"message from signup view")
+    messages.success(request, "message from signup view")
     return render(request, 'home.html', {})
