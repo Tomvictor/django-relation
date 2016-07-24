@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+<p>home page </p>
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="alert alert-info alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <span>{{ message }}</span>
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+
+</body>
+</html>

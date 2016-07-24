@@ -19,5 +19,7 @@ from mysite import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.login,name='my-login')
+    url(r'^login/$',views.login,name='my-login'),
+    url(r'^$',views.home, name='home-page'),
+    url(r'^signup/$',views.sign_up,name='signup-page')
 ]
