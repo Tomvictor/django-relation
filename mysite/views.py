@@ -59,7 +59,7 @@ def sign_up(request):
             NewUser.last_name = LastName
             NewUser.is_active = False
             NewUser.save()
-            NewAccount = accounts(FirstName=FirstName, date_of_birth=Dob,gender=Gender,mobile_no=MobileNo)
+            NewAccount = accounts(date_of_birth=Dob,gender=Gender,mobile_no=MobileNo)
             NewAccount.save()
             messages.success(request, "Hi,%s ! You have been Succesfully Signed Up, Please Login Again " % (FirstName))
             return render(request, "home.html", {})
